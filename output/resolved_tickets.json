@@ -1,0 +1,248 @@
+{
+  "source": "output/audit_trail.json (records after the reset at 2026-10-14T19:34:48.984+00:00) and data/campus_customs_new.db",
+  "shop_date": "2026-08-31",
+  "checking_start": 3400.0,
+  "checking_end": 160.0,
+  "total_paid": 3240.0,
+  "total_tokens": 78242,
+  "tickets": [
+    {
+      "id": 101,
+      "subject": "Bulldog tee",
+      "requester": "Tauhid Zaman",
+      "final_status": "needs_info",
+      "outcome": "Invoice 501 ($840) was paid with human approval, which unblocked Bulldog Print Co. Size S is still out of stock; a 1-unit restock (5-day lead) is ready, and Tauhid has been asked to choose an in-stock size or wait.",
+      "agent_contributions": {
+        "boss": "Delegated to Inventory, Accounting, and Customer Service in parallel; set waiting_on_approval, then needs_info after the re-check.",
+        "inventory": "Found size S short by 1 and Bulldog Print Co blocked by invoice 501; after payment confirmed the vendor was unblocked with a 5-day lead time and proposed a 1-unit restock.",
+        "accounting": "Checked bills, past payments, and the vendor's status, then requested pay_invoice for invoice 501 ($840), which paused for approval.",
+        "customer_service": "Drafted two replies to Tauhid offering M (5), L (3), XL (2) or waiting for S; saved to the board, not sent."
+      },
+      "human_approvals": [
+        {
+          "tool": "pay_invoice",
+          "args": {
+            "invoice_id": 501
+          },
+          "decision": "approved",
+          "approved_by": "Mitchell",
+          "amount": 840.0,
+          "checking_before": 3400.0,
+          "checking_after": 2560.0,
+          "at": "2026-10-14T19:36:49.085+00:00"
+        }
+      ],
+      "pending_human_decisions": [
+        "Tauhid Zaman: choose an in-stock size or wait for the size S restock"
+      ],
+      "cash_change": -840.0,
+      "runs": [
+        {
+          "run_id": "389b6ee0bce4",
+          "agents": [
+            "boss",
+            "inventory",
+            "accounting",
+            "customer_service"
+          ],
+          "delegations": [
+            {
+              "from": "boss",
+              "to": "inventory",
+              "task": "For ticket 101, determine restock path for CC-TEE-WHITE size S qty 1, including vendor availability/blocker and proposed action."
+            },
+            {
+              "from": "boss",
+              "to": "accounting",
+              "task": "For ticket 101, assess open invoice 501 for vendor 1, payment eligibility against cash, and request payment if needed to unblock vendor/restock."
+            },
+            {
+              "from": "boss",
+              "to": "customer_service",
+              "task": "Draft a reply to requester Tauhid Zaman for ticket 101 explaining size S availability/restock status, based on context."
+            },
+            {
+              "from": "customer_service",
+              "to": "inventory",
+              "task": "For ticket 101, confirm whether size S Classic Bulldog Tee has a known restock timing/status we can share with Tauhid Zaman."
+            },
+            {
+              "from": "inventory",
+              "to": "accounting",
+              "task": "Ticket 101 restock requires unblocking vendor 1, Bulldog Print Co. Please assess/prep payment for open invoice 501, amount $840, overdue 3 days, and report recommendation.",
+              "refused": "Delegation refused: this ticket has used its delegation budget. Finish with what you already have."
+            }
+          ],
+          "tools": {
+            "inventory": [
+              "find_restock_vendors"
+            ],
+            "accounting": [
+              "list_bills_due",
+              "list_payments",
+              "get_vendor_status",
+              "pay_invoice"
+            ]
+          },
+          "final_status": "waiting_on_approval",
+          "model_calls": 11,
+          "tokens": 30755,
+          "trigger": "dashboard"
+        },
+        {
+          "run_id": "9a94fb179fb0",
+          "agents": [
+            "boss",
+            "inventory",
+            "customer_service"
+          ],
+          "delegations": [
+            {
+              "from": "boss",
+              "to": "inventory",
+              "task": "For ticket 101, invoice 501 is now paid. Confirm the path to restock CC-TEE-WHITE size S qty 1, including vendor lead time and any PO/restock action needed."
+            },
+            {
+              "from": "boss",
+              "to": "customer_service",
+              "task": "Draft a reply to Tauhid Zaman for ticket 101: size S is unavailable currently, invoice 501 has been paid, restock timing if supported, and offer available alternative sizes L, M, XL."
+            }
+          ],
+          "tools": {
+            "inventory": [
+              "find_restock_vendors"
+            ]
+          },
+          "final_status": "needs_info",
+          "model_calls": 5,
+          "tokens": 14648,
+          "trigger": "automatic re-check after approval"
+        }
+      ]
+    },
+    {
+      "id": 102,
+      "subject": "Rent due",
+      "requester": "Elm City Properties",
+      "final_status": "resolved",
+      "outcome": "Rent of $2,400 for the Chapel Street lease was paid with human approval, and the next due date moved to 2026-10-02. Boss re-checked and resolved the ticket.",
+      "agent_contributions": {
+        "boss": "Delegated to Facilities, set waiting_on_approval, then resolved the ticket on the automatic re-check without further delegation.",
+        "facilities": "Confirmed cash covers the rent with list_bills_due, then requested pay_rent for lease 1 ($2,400), which paused for approval."
+      },
+      "human_approvals": [
+        {
+          "tool": "pay_rent",
+          "args": {
+            "lease_id": 1
+          },
+          "decision": "approved",
+          "approved_by": "Mitchell",
+          "amount": 2400.0,
+          "checking_before": 2560.0,
+          "checking_after": 160.0,
+          "at": "2026-10-14T19:38:37.780+00:00"
+        }
+      ],
+      "pending_human_decisions": [],
+      "cash_change": -2400.0,
+      "runs": [
+        {
+          "run_id": "9542cf092bd7",
+          "agents": [
+            "boss",
+            "facilities"
+          ],
+          "delegations": [
+            {
+              "from": "boss",
+              "to": "facilities",
+              "task": "Handle rent notice ticket 102 for lease 1. Check cash and request the rent payment if feasible; report the payment amount/ref and any draft or blocker."
+            }
+          ],
+          "tools": {
+            "facilities": [
+              "list_bills_due",
+              "pay_rent"
+            ]
+          },
+          "final_status": "waiting_on_approval",
+          "model_calls": 4,
+          "tokens": 9837,
+          "trigger": "dashboard"
+        },
+        {
+          "run_id": "d3ebf3f09af9",
+          "agents": [
+            "boss"
+          ],
+          "delegations": [],
+          "tools": {},
+          "final_status": "resolved",
+          "model_calls": 1,
+          "tokens": 2662,
+          "trigger": "automatic re-check after approval"
+        }
+      ]
+    },
+    {
+      "id": 103,
+      "subject": "Bulk hoodie discount",
+      "requester": "Yale AI Club",
+      "final_status": "waiting_on_approval",
+      "outcome": "Accounting found a $50/unit price (13.79% off list) still above cost; only 8 of 20 size M are in stock. Boss is waiting on a human decision for the $50 price and a 12-unit restock; no money moved.",
+      "agent_contributions": {
+        "boss": "Delegated to Accounting, Inventory, and Customer Service in parallel; set waiting_on_approval for the price and restock decisions.",
+        "accounting": "Ran check_margin at list ($36/unit, $720 total) and at $50 ($28/unit, $560 total); proposed the $50 price for human approval.",
+        "inventory": "Found 8 of 20 size M in stock (short 12) and proposed a 12-unit restock from Bulldog Print Co with a 5-day lead time.",
+        "customer_service": "Drafted a reply to Yale AI Club noting 8 in stock and that pricing is under review; saved to the board, not sent."
+      },
+      "human_approvals": [],
+      "pending_human_decisions": [
+        "Approve or reject the $50 per-unit price (below the $58 list price)",
+        "Approve or reject a 12-unit restock of CC-HOOD-NAVY size M"
+      ],
+      "cash_change": 0.0,
+      "runs": [
+        {
+          "run_id": "0f23f134dd0d",
+          "agents": [
+            "boss",
+            "accounting",
+            "inventory",
+            "customer_service"
+          ],
+          "delegations": [
+            {
+              "from": "boss",
+              "to": "accounting",
+              "task": "Ticket 103 price override: assess margin and whether any discount for 20 CC-HOOD-NAVY hoodies (size M) is acceptable. Cite pricing data and recommend a price decision/action."
+            },
+            {
+              "from": "boss",
+              "to": "inventory",
+              "task": "Ticket 103: assess fulfillment of 20 CC-HOOD-NAVY size M from available stock and restock options/constraints. Cite relevant inventory/vendor facts and recommendation."
+            },
+            {
+              "from": "boss",
+              "to": "customer_service",
+              "task": "Draft a response to Yale AI Club for ticket 103 asking a bulk discount on 20 CC-HOOD-NAVY size M, subject to inventory/price review."
+            }
+          ],
+          "tools": {
+            "accounting": [
+              "check_margin"
+            ],
+            "inventory": [
+              "find_restock_vendors"
+            ]
+          },
+          "final_status": "waiting_on_approval",
+          "model_calls": 7,
+          "tokens": 20340,
+          "trigger": "dashboard"
+        }
+      ]
+    }
+  ]
+}

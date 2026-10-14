@@ -1,0 +1,86 @@
+{
+  "server": "campus-customs",
+  "database": "data/campus_customs_new.db",
+  "shop_date_today": "2026-08-31",
+  "tests": [
+    {
+      "prompt": "Call each campus-customs MCP tool: list_open_tickets, get_ticket_details for 101, 102, and 103, and list_bills_due. Keep logging my prompts in Homework-5/AI_prompts.md.",
+      "tool": "list_open_tickets",
+      "arguments": {},
+      "output": {
+        "date_today": "2026-08-31",
+        "tickets": [
+          {"id": 101, "type": "customer_order", "requester": "Tauhid Zaman", "subject": "Bulldog tee", "sku": "CC-TEE-WHITE", "size": "S", "qty": 1, "lease_id": null, "invoice_id": 501, "status": "open", "notes": "Needs a tee in size S.", "created_at": "2026-08-31T09:15:00-04:00"},
+          {"id": 102, "type": "rent_notice", "requester": "Elm City Properties", "subject": "Rent due", "sku": null, "size": null, "qty": null, "lease_id": 1, "invoice_id": null, "status": "open", "notes": "Email: shop rent due in 2 days.", "created_at": "2026-08-31T11:05:00-04:00"},
+          {"id": 103, "type": "price_override", "requester": "Yale AI Club", "subject": "Bulk hoodie discount", "sku": "CC-HOOD-NAVY", "size": "M", "qty": 20, "lease_id": null, "invoice_id": null, "status": "open", "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.", "created_at": "2026-08-31T16:55:00-04:00"}
+        ]
+      }
+    },
+    {
+      "prompt": "Call each campus-customs MCP tool: list_open_tickets, get_ticket_details for 101, 102, and 103, and list_bills_due. Keep logging my prompts in Homework-5/AI_prompts.md.",
+      "tool": "get_ticket_details",
+      "arguments": {"ticket_id": 101},
+      "output": {
+        "date_today": "2026-08-31",
+        "ticket": {"id": 101, "type": "customer_order", "requester": "Tauhid Zaman", "subject": "Bulldog tee", "sku": "CC-TEE-WHITE", "size": "S", "qty": 1, "lease_id": null, "invoice_id": 501, "status": "open", "notes": "Needs a tee in size S.", "created_at": "2026-08-31T09:15:00-04:00"},
+        "inventory": {"sku": "CC-TEE-WHITE", "name": "Classic Bulldog Tee", "size": "S", "qty": 0, "location": "Aisle B", "qty_requested": 1, "short_by": 1},
+        "all_sizes_in_stock": [
+          {"size": "L", "qty": 3, "location": "Aisle B"},
+          {"size": "M", "qty": 5, "location": "Aisle B"},
+          {"size": "S", "qty": 0, "location": "Aisle B"},
+          {"size": "XL", "qty": 2, "location": "Aisle B"}
+        ],
+        "pricing": {"sku": "CC-TEE-WHITE", "unit_cost": 8, "list_price": 28},
+        "invoice": {"id": 501, "vendor_id": 1, "amount": 840, "due_date": "2026-08-28", "status": "open", "description": "Rush reprint CC-TEE-WHITE S", "days_overdue": 3, "due_status": "overdue"},
+        "vendor": {"id": 1, "name": "Bulldog Print Co", "specialty": "apparel reprint", "lead_days": 5}
+      }
+    },
+    {
+      "prompt": "Call each campus-customs MCP tool: list_open_tickets, get_ticket_details for 101, 102, and 103, and list_bills_due. Keep logging my prompts in Homework-5/AI_prompts.md.",
+      "tool": "get_ticket_details",
+      "arguments": {"ticket_id": 102},
+      "output": {
+        "date_today": "2026-08-31",
+        "ticket": {"id": 102, "type": "rent_notice", "requester": "Elm City Properties", "subject": "Rent due", "sku": null, "size": null, "qty": null, "lease_id": 1, "invoice_id": null, "status": "open", "notes": "Email: shop rent due in 2 days.", "created_at": "2026-08-31T11:05:00-04:00"},
+        "lease": {"id": 1, "space_name": "Chapel Street shop", "landlord": "Elm City Properties", "monthly_rent": 2400, "next_due": "2026-09-02", "notes": null, "days_overdue": -2, "due_status": "upcoming"}
+      }
+    },
+    {
+      "prompt": "Call each campus-customs MCP tool: list_open_tickets, get_ticket_details for 101, 102, and 103, and list_bills_due. Keep logging my prompts in Homework-5/AI_prompts.md.",
+      "tool": "get_ticket_details",
+      "arguments": {"ticket_id": 103},
+      "output": {
+        "date_today": "2026-08-31",
+        "ticket": {"id": 103, "type": "price_override", "requester": "Yale AI Club", "subject": "Bulk hoodie discount", "sku": "CC-HOOD-NAVY", "size": "M", "qty": 20, "lease_id": null, "invoice_id": null, "status": "open", "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.", "created_at": "2026-08-31T16:55:00-04:00"},
+        "inventory": {"sku": "CC-HOOD-NAVY", "name": "Basic Hoodie Big Yale", "size": "M", "qty": 8, "location": "Aisle A", "qty_requested": 20, "short_by": 12},
+        "all_sizes_in_stock": [
+          {"size": "L", "qty": 14, "location": "Aisle A"},
+          {"size": "M", "qty": 8, "location": "Aisle A"},
+          {"size": "S", "qty": 4, "location": "Aisle A"},
+          {"size": "XL", "qty": 6, "location": "Aisle A"}
+        ],
+        "pricing": {"sku": "CC-HOOD-NAVY", "unit_cost": 22, "list_price": 58}
+      }
+    },
+    {
+      "prompt": "Call each campus-customs MCP tool: list_open_tickets, get_ticket_details for 101, 102, and 103, and list_bills_due. Keep logging my prompts in Homework-5/AI_prompts.md.",
+      "tool": "list_bills_due",
+      "arguments": {},
+      "output": {
+        "date_today": "2026-08-31",
+        "open_invoices": [
+          {"id": 501, "vendor_id": 1, "vendor_name": "Bulldog Print Co", "amount": 840, "due_date": "2026-08-28", "status": "open", "description": "Rush reprint CC-TEE-WHITE S", "days_overdue": 3, "due_status": "overdue"}
+        ],
+        "rent_due": [
+          {"lease_id": 1, "space_name": "Chapel Street shop", "landlord": "Elm City Properties", "monthly_rent": 2400, "next_due": "2026-09-02", "days_overdue": -2, "due_status": "upcoming"}
+        ],
+        "cash_accounts": [
+          {"name": "checking", "balance": 3400, "date": "2026-08-31"}
+        ],
+        "total_due": 3240,
+        "cash_after_paying_all": 160,
+        "cash_covers_all": true
+      }
+    }
+  ]
+}
